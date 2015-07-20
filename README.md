@@ -74,3 +74,7 @@ use composer
             ];
         }
     }
+
+
+read more here
+https://github.com/fizk/Loggjafarthing/wiki/Controllers
