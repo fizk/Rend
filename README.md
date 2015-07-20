@@ -1,3 +1,19 @@
+### How to get
+use composer
+
+   {
+        "name": "what-ever",
+        "repositories": [
+            {
+                "type": "vcs",
+                "url": "https://github.com/fizk/Rend"
+            }
+        ],
+        "require": {
+            "php": ">=5.5",
+            "fizk/rend": "dev-master"
+        },
+    }
 
     module.config.php
     
