@@ -1,6 +1,6 @@
 ### How to get
 use composer
-
+```
    {
         "name": "what-ever",
         "repositories": [
@@ -14,6 +14,7 @@ use composer
             "fizk/rend": "dev-master"
         },
     }
+```
 
     module.config.php
     
