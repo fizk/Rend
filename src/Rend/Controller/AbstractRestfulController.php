@@ -409,7 +409,7 @@ abstract class AbstractRestfulController extends AbstractController
                 $id = $this->getIdentifier($routeMatch, $request);
                 $data = $this->processPostData($request);
 
-                if ($id !== false) {
+                if ($id == false) {
                     $action = 'post';
                     $return = $this->post($data);
                     break;
