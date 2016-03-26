@@ -58,7 +58,7 @@ class MultiPart
                 // match "name" and optional value in between newline sequences
                 preg_match('/name=\"([^\"]*)\"[\n|\r]+([^\n\r].*)?\r$/s', $block, $matches);
             }
-            $a_data[$matches[1]] = trim($matches[2]);
+            $a_data[$matches[1]] = isset($matches[2]) ? trim($matches[2]) : null;
         }
         return $a_data;
     }
