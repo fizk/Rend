@@ -93,8 +93,11 @@ class MessageStrategy extends AbstractListenerAggregate
         foreach ($model->getOptions() as $key => $value) {
             $headers->addHeaderLine($key, $value);
         }
-        $headers->addHeaderLine('content-type', 'application/json; charset=utf-8');
+        $headers->addHeaderLine('Content-type', 'application/json; charset=utf-8');
         $headers->addHeaderLine('Access-Control-Allow-Origin', '*');
+        if ($model->getStatus() == 206) {
+            $headers->addHeaderLine('Access-Control-Expose-Headers', 'Range-Unit, Content-Range');
+        }
     }
 
     /**
