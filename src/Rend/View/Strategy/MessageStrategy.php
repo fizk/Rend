@@ -94,6 +94,7 @@ class MessageStrategy extends AbstractListenerAggregate
             $headers->addHeaderLine($key, $value);
         }
         $headers->addHeaderLine('content-type', 'application/json; charset=utf-8');
+        $headers->addHeaderLine('Access-Control-Allow-Origin', '*');
     }
 
     /**
