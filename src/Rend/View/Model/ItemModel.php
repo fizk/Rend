@@ -15,10 +15,10 @@ class ItemModel extends EmptyModel
     /**
      * Constructor
      *
-     * @param  null|\stdClass| $variables
+     * @param  null|mixed $variables
      * @param  array|\Traversable $options
      */
-    public function __construct(\stdClass $variables = null, $options = null)
+    public function __construct($variables = null, $options = null)
     {
         $this->variables = $variables;
         if (is_array($options) || $options instanceof \Traversable) {
