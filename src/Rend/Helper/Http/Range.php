@@ -1,75 +1,68 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 8/06/15
- * Time: 9:10 PM
- */
-
 namespace Rend\Helper\Http;
 
 use Zend\Stdlib\RequestInterface;
 
 trait Range
 {
-    private $perPage = 25;
-
     /**
      * Split up Range HTTP header or return default.
      *
      * @param RequestInterface $request
      * @param int $count
-     * @return object
+     * @param int $perPage
+     * @return RangeValue
      * @todo if range is something like 'items hundur-vei'
      */
-    private function getRange(RequestInterface $request, $count = 0)
+    private function getRange(RequestInterface $request, $count = 0, $perPage = 25): RangeValue
     {
         /** @var $range \Zend\Http\Header\Range */
         if ($range = $request->getHeader('Range')) {
             $match = [];
-            preg_match('/([0-9]*)-([0-9]*)/', $range->getFieldValue(), $match);
-            if (count($match) == 3) {
-                $from = (int) $match[1];
-                $to = (int) $match[2];
+            preg_match('/([0-9]*)-([0-9]*)?/', $range->getFieldValue(), $match);
 
+            $from = is_numeric($match[1]) ? (int) $match[1] : 0;
+            $to = is_numeric($match[2]) ? (int) $match[2] : null;
+
+            if ($to === null) {
+                return (new RangeValue())
+                    ->setFrom($from)
+                    ->setTo(null);
+            } else {
                 //NEGATIVE RANGE
                 if ($to - $from < 0) {
-                    return [
-                        'from' => 0,
-                        'to' => 0
-                    ];
-                    //OUT OF RANGE
+                    return (new RangeValue())
+                        ->setFrom(0)
+                        ->setTo(0);
+                //OUT OF RANGE
                 } elseif ($to > $count) {
                     //BOTH OUT OF RANGE
                     if ($from > $count) {
-                        return [
-                            'from' => 0,
-                            'to' => 0
-                        ];
+                        return (new RangeValue())
+                            ->setFrom(0)
+                            ->setTo(0);
                     }
                     //LOWER BOUND IN RANGE
-                    return [
-                        'from' => $from,
-                        'to' => $count
-                    ];
-                    //RANGE BIGGER
-                } elseif ($to - $from > $this->perPage) {
-                    return [
-                        'from' => $from,
-                        'to' => $from + $this->perPage
-                    ];
+                    return (new RangeValue())
+                        ->setFrom($from)
+                        ->setTo($count);
+                //RANGE BIGGER
+                } elseif ($to - $from > $perPage) {
+                    return (new RangeValue())
+                        ->setFrom($from)
+                        ->setTo($from + $perPage);
+
                 }
 
-                return [
-                    'from' => $from,
-                    'to' => $to
-                ];
+                return (new RangeValue())
+                    ->setFrom($from)
+                    ->setTo($to);
             }
-        }
 
-        return [
-            'from' => 0,
-            'to' => ($this->perPage > $count) ? $count : $this->perPage
-        ];
+        } else {
+            return (new RangeValue())
+                ->setFrom(0)
+                ->setTo(null);
+        }
     }
 }

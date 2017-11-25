@@ -11,6 +11,7 @@ namespace Rend\Controller;
 use Rend\Helper\Http\MultiPart;
 use Rend\View\Model\EmptyModel;
 use Rend\View\Model\ErrorModel;
+use Rend\View\Model\ModelInterface;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\Http\Request as HttpRequest;
@@ -83,7 +84,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Create a new resource
      *
      * @param  mixed $data
-     * @return mixed
+     * @return ModelInterface
      */
     public function post($data)
     {
@@ -96,7 +97,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $id
      * @param  mixed $data
-     * @return mixed
+     * @return ModelInterface
      */
     public function postList($id, $data)
     {
@@ -108,7 +109,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Delete an existing resource
      *
      * @param  mixed $id
-     * @return mixed
+     * @return ModelInterface
      */
     public function delete($id)
     {
@@ -122,7 +123,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @return mixed
+     * @return ModelInterface
      */
     public function deleteList($data)
     {
@@ -134,7 +135,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Return single resource
      *
      * @param  mixed $id
-     * @return mixed
+     * @return ModelInterface
      */
     public function get($id)
     {
@@ -145,7 +146,7 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Return list of resources
      *
-     * @return mixed
+     * @return ModelInterface
      */
     public function getList()
     {
@@ -160,7 +161,7 @@ abstract class AbstractRestfulController extends AbstractController
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @param  null|mixed $id
-     * @return mixed
+     * @return ModelInterface
      */
     public function head($id = null)
     {
@@ -177,7 +178,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @return mixed
+     * @return ModelInterface
      */
     public function options()
     {
@@ -195,7 +196,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @return mixed
+     * @return ModelInterface
      */
     public function optionsList()
     {
@@ -211,7 +212,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  $id
      * @param  $data
-     * @return array
+     * @return ModelInterface
      */
     public function patch($id, $data)
     {
@@ -226,7 +227,7 @@ abstract class AbstractRestfulController extends AbstractController
      * (introduced in 2.2.0); instead, raises an exception if not implemented.
      *
      * @param  mixed $data
-     * @return mixed
+     * @return ModelInterface
      */
     public function patchList($data)
     {
@@ -241,7 +242,7 @@ abstract class AbstractRestfulController extends AbstractController
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @param  mixed $data
-     * @return mixed
+     * @return ModelInterface
      */
     public function putList($data)
     {
@@ -254,7 +255,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $id
      * @param  mixed $data
-     * @return mixed
+     * @return ModelInterface
      */
     public function put($id, $data)
     {
@@ -265,7 +266,7 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Basic functionality for when a page is not available
      *
-     * @return array
+     * @return ModelInterface
      */
     public function notFoundAction()
     {
