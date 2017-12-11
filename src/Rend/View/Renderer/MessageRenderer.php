@@ -8,7 +8,7 @@
 
 namespace Rend\View\Renderer;
 
-use Zend\View\Model\ModelInterface;
+use Rend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
 use Zend\View\Resolver\ResolverInterface;
 
@@ -53,8 +53,8 @@ class MessageRenderer implements RendererInterface
      */
     public function render($nameOrModel, $values = null)
     {
-        if ($nameOrModel instanceof \Serializable) {
-            return $nameOrModel->serialize();
+        if ($nameOrModel instanceof ModelInterface) {
+            return $nameOrModel->toJson();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Rend\View\Model;
  * Interface ModelInterface
  * @package Restvisi\View\Model
  */
-interface ModelInterface extends \Serializable
+interface ModelInterface
 {
     /**
      * Set HTTP location header
@@ -43,4 +43,9 @@ interface ModelInterface extends \Serializable
      * @return int
      */
     public function getStatus();
+
+    /**
+     * @return string
+     */
+    public function toJson();
 }
