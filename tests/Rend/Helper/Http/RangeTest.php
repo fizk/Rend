@@ -1,11 +1,11 @@
 <?php
 namespace Rend\Helper\Http;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Http\Headers;
 use Zend\Http\PhpEnvironment\Request;
 
-class RangeTest extends PHPUnit_Framework_TestCase
+class RangeTest extends TestCase
 {
     public function testFullValidRange()
     {
