@@ -1,34 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:01 PM
- */
-
 namespace Rend\View\Strategy;
 
 use Rend\View\Model\ModelInterface;
-use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\View\Renderer\RendererInterface;
 use Zend\View\ViewEvent;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\EventManager\ListenerAggregateTrait;
 
 /**
  * Class MessageStrategy
  * @package Restvisi\View\Strategy
  */
-class MessageStrategy extends AbstractListenerAggregate
+class MessageStrategy implements ListenerAggregateInterface
 {
+    use ListenerAggregateTrait;
+
     /**
      * @var RendererInterface
      */
     protected $renderer;
-
-    /**
-     * @var array
-     */
-    protected $listeners = array();
 
     /**
      * @param RendererInterface $renderer
@@ -45,23 +36,23 @@ class MessageStrategy extends AbstractListenerAggregate
      * implementation will pass this to the aggregate.
      *
      * @param EventManagerInterface $events
-     *
+     * @param int $priority
      * @return void
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1): void
     {
-        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'));
-        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'));
+        $this->listeners[] = $events->attach('renderer', [$this, 'selectRenderer'], 1000);
+        $this->listeners[] = $events->attach('response', [$this, 'injectResponse'], 1000);
     }
 
     /**
      * @param ViewEvent $e
-     * @return void|RendererInterface
+     * @return RendererInterface
      */
-    public function selectRenderer(ViewEvent $e)
+    public function selectRenderer(ViewEvent $e): ?RendererInterface
     {
         if (!$e->getModel() instanceof ModelInterface) {
-            return;
+            return null;
         }
         return $this->renderer;
     }
@@ -69,7 +60,7 @@ class MessageStrategy extends AbstractListenerAggregate
     /**
      * @param ViewEvent $e
      */
-    public function injectResponse(ViewEvent $e)
+    public function injectResponse(ViewEvent $e): void
     {
         if (!$e->getModel() instanceof ModelInterface) {
             return;
@@ -77,15 +68,14 @@ class MessageStrategy extends AbstractListenerAggregate
 
         $result   = $e->getResult();
 
-        $model = $e->getModel();
         /** @var $model \Zend\View\Model\ModelInterface */
+        $model = $e->getModel();
 
-        // Populate response
-        $response = $e->getResponse();
         /** @var $response \Zend\Http\PhpEnvironment\Response */
+        $response = $e->getResponse();
         $response->setContent($result);
 
-        if (get_class($model) == 'Althingi\View\Model\EmptyModel') {//FIXME
+        if (get_class($model) == 'Rend\View\Model\EmptyModel') {//FIXME
             $response->setContent('');
         }
         $response->setStatusCode($model->getStatus());
@@ -97,18 +87,6 @@ class MessageStrategy extends AbstractListenerAggregate
         $headers->addHeaderLine('Access-Control-Allow-Origin', '*');
         if ($model->getStatus() == 206) {
             $headers->addHeaderLine('Access-Control-Expose-Headers', 'Range-Unit, Content-Range');
-        }
-    }
-
-    /**
-     * @param EventManagerInterface $events
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
         }
     }
 }

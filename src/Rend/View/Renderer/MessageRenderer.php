@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 4:39 PM
- */
-
 namespace Rend\View\Renderer;
 
 use Rend\View\Model\ModelInterface;
@@ -42,6 +35,7 @@ class MessageRenderer implements RendererInterface
     public function setResolver(ResolverInterface $resolver)
     {
         $this->resolver = $resolver;
+        return $this;
     }
 
     /**

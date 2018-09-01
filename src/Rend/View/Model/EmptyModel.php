@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:22 PM
- */
-
 namespace Rend\View\Model;
 
-use Traversable;
 use \Zend\View\Model\ModelInterface as BaseModelInterface;
 
 class EmptyModel implements ModelInterface, BaseModelInterface
@@ -44,15 +36,12 @@ class EmptyModel implements ModelInterface, BaseModelInterface
     }
 
     /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
      * Retrieve an external iterator
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
+     * @return array
      */
     public function getIterator()
     {
-        // TODO: Implement getIterator() method.
+        return [];
     }
 
     /**
@@ -62,7 +51,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      * @param  mixed $value
      * @return ModelInterface
      */
-    public function setOption($name, $value)
+    public function setOption(string $name, $value)
     {
         $this->options[$name] = $value;
         return $this;
@@ -96,7 +85,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      * @param string $location
      * @return $this
      */
-    public function setLocation($location)
+    public function setLocation(string $location)
     {
         $this->setOption('Location', $location);
         return $this;
@@ -108,12 +97,16 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      * @param int $length
      * @return $this
      */
-    public function setLength($length)
+    public function setLength(int $length)
     {
         $this->setOption('Content-Length', $length);
         return $this;
     }
 
+    /**
+     * @param array $allow
+     * @return $this
+     */
     public function setAllow(array $allow)
     {
         $this->setOption('Allow', implode(',', $allow));
@@ -126,7 +119,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      * @param $code
      * @return $this
      */
-    public function setStatus($code)
+    public function setStatus(int $code)
     {
         $this->statusCode = $code;
         return $this;
@@ -137,7 +130,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->statusCode;
     }
@@ -151,7 +144,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      */
     public function getVariable($name, $default = null)
     {
-        // TODO: Implement getVariable() method.
+        return null;
     }
 
     /**
@@ -307,15 +300,9 @@ class EmptyModel implements ModelInterface, BaseModelInterface
     }
 
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object
-     * @link http://php.net/manual/en/countable.count.php
-     * @return int The custom count as an integer.
-     * </p>
-     * <p>
      * The return value is cast to an integer.
      */
-    public function count()
+    public function count(): int
     {
         return 0;
     }

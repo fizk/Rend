@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:23 PM
- */
-
 namespace Rend\View\Model;
 
 use Zend\Form\Form;
@@ -52,7 +45,7 @@ class ErrorModel extends ItemModel
      * @param Form $form
      * @return array
      */
-    private function extractForm(Form $form)
+    private function extractForm(Form $form): array
     {
         return array_map(function ($value, $key) {
             return [
@@ -69,7 +62,7 @@ class ErrorModel extends ItemModel
      * @param \Exception $exception
      * @return array
      */
-    private function extractException(\Exception $exception)
+    private function extractException(\Exception $exception): array
     {
         $messages = [];
         while ($exception) {
@@ -87,7 +80,7 @@ class ErrorModel extends ItemModel
      * @param string $string
      * @return array
      */
-    private function extractString($string)
+    private function extractString($string): array
     {
         return [
             ['message' => $string]

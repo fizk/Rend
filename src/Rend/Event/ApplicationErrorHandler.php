@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 6/06/15
- * Time: 11:19 AM
- */
-
 namespace Rend\Event;
 
 use Rend\View\Model\ErrorModel;

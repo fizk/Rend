@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:08 PM
- */
-
 namespace Rend\View\Model;
 
 /**
@@ -19,7 +12,7 @@ interface ModelInterface
      * @param $location
      * @return ModelInterface
      */
-    public function setLocation($location);
+    public function setLocation(string $location);
 
     /**
      * Set HTTP length header.
@@ -27,7 +20,7 @@ interface ModelInterface
      * @param int $length
      * @return ModelInterface
      */
-    public function setLength($length);
+    public function setLength(int $length);
 
     /**
      * Set HTTP status code.
@@ -35,17 +28,17 @@ interface ModelInterface
      * @param $code
      * @return ModelInterface
      */
-    public function setStatus($code);
+    public function setStatus(int $code);
 
     /**
      * Get HTTP status code.
      *
      * @return int
      */
-    public function getStatus();
+    public function getStatus(): int;
 
     /**
      * @return string
      */
-    public function toJson();
+    public function toJson(): string;
 }

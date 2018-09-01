@@ -1,14 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:22 PM
- */
-
 namespace Rend\View\Model;
-
-use Traversable;
 
 class ItemModel extends EmptyModel
 {

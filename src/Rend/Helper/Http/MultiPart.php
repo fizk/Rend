@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 8/06/15
- * Time: 10:44 AM
- */
-
 namespace Rend\Helper\Http;
 
 use Zend\Http\PhpEnvironment\Request;

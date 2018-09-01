@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einar.adalsteinsson
- * Date: 10/25/17
- * Time: 4:26 PM
- */
-
 namespace Rend\Helper\Http;
 
 class RangeValue

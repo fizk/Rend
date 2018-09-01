@@ -1,32 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 26/04/15
- * Time: 9:23 PM
- */
-
 namespace Rend\View\Model;
 
 class CollectionModel extends ItemModel
 {
-
-    /**
-     * Set HTTP range header.
-     *
-     * @param int $lower
-     * @param int $upper
-     * @param int $size Complete size of collection
-     * @return $this
-     */
-    public function setRange($lower, $upper, $size)
-    {
-        $this->setOption('Access-Control-Expose-Headers', 'Range-Unit, Content-Range');
-        $this->setOption('Range-Unit', "items");
-        $this->setOption('Content-Range', "items {$lower}-{$upper}/{$size}");
-        return $this;
-    }
-
     /**
      * Constructor
      *
@@ -41,5 +17,21 @@ class CollectionModel extends ItemModel
                 $this->setOption($key, $value);
             }
         }
+    }
+
+    /**
+     * Set HTTP range header.
+     *
+     * @param int $lower
+     * @param int $upper
+     * @param int $size Complete size of collection
+     * @return $this
+     */
+    public function setRange(int $lower, int $upper, int $size)
+    {
+        $this->setOption('Access-Control-Expose-Headers', 'Range-Unit, Content-Range');
+        $this->setOption('Range-Unit', "items");
+        $this->setOption('Content-Range', "items {$lower}-{$upper}/{$size}");
+        return $this;
     }
 }

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: einarvalur
- * Date: 22/05/15
- * Time: 8:18 AM
- */
-
 namespace Rend\Controller;
 
 use Rend\Helper\Http\MultiPart;
@@ -32,12 +25,12 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * @var array
      */
-    protected $contentTypes = array(
-        self::CONTENT_TYPE_JSON => array(
+    protected $contentTypes = [
+        self::CONTENT_TYPE_JSON => [
             'application/hal+json',
             'application/json'
-        )
-    );
+        ]
+    ];
 
     /**
      * Name of request or query parameter containing identifier
@@ -56,7 +49,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @var array
      */
-    protected $customHttpMethodsMap = array();
+    protected $customHttpMethodsMap = [];
 
     /**
      * Set the route match/query parameter name containing the identifier
@@ -120,9 +113,6 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Delete the entire resource collection
      *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
-     *
      * @return ModelInterface
      */
     public function deleteList($data)
@@ -157,9 +147,6 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Retrieve HEAD metadata for the resource
      *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
-     *
      * @param  null|mixed $id
      * @return ModelInterface
      */
@@ -174,9 +161,6 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * Typically, set the Allow header with allowed HTTP methods, and
      * return the response.
-     *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @return ModelInterface
      */
@@ -193,9 +177,6 @@ abstract class AbstractRestfulController extends AbstractController
      * Typically, set the Allow header with allowed HTTP methods, and
      * return the response.
      *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
-     *
      * @return ModelInterface
      */
     public function optionsList()
@@ -206,9 +187,6 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Respond to the PATCH method
-     *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @param  $id
      * @param  $data
@@ -223,9 +201,6 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Modify a resource collection without completely replacing it
      *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.2.0); instead, raises an exception if not implemented.
-     *
      * @param  mixed $data
      * @return ModelInterface
      */
@@ -237,9 +212,6 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Replace an entire resource collection
-     *
-     * Not marked as abstract, as that would introduce a BC break
-     * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @param  mixed $data
      * @return ModelInterface
@@ -310,10 +282,6 @@ abstract class AbstractRestfulController extends AbstractController
     {
         $routeMatch = $e->getRouteMatch();
         if (! $routeMatch) {
-            /**
-             * @todo Determine requirements for when route match is missing.
-             *       Potentially allow pulling directly from request metadata?
-             */
             throw new Exception\DomainException(
                 'Missing route matches; unsure how to retrieve action'
             );
@@ -537,7 +505,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Attempts to see if an identifier was passed in either the URI or the
      * query string, returning it if found. Otherwise, returns a boolean false.
      *
-     * @param  \Zend\Mvc\Router\RouteMatch $routeMatch
+     * @param  \Zend\Router\RouteMatch $routeMatch
      * @param  Request $request
      * @return false|mixed
      */
@@ -598,7 +566,7 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * HTTP-Override takes precedence over Method.
      *
-     * @param \Zend\Http\PhpEnvironment\Request $request
+     * @param \Zend\Stdlib\RequestInterface $request
      * @return string
      */
     private function resolveMethod($request)
