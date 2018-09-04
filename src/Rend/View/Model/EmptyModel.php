@@ -30,7 +30,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
     /**
      * @return string
      */
-    public function toJson()
+    public function toJson(): string
     {
         return json_encode($this->variables);
     }
@@ -51,7 +51,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      * @param  mixed $value
      * @return ModelInterface
      */
-    public function setOption(string $name, $value)
+    public function setOption($name, $value)
     {
         $this->options[$name] = $value;
         return $this;
