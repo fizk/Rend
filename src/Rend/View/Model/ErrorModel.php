@@ -26,6 +26,8 @@ class ErrorModel extends ItemModel
             $this->variables = $this->extractForm($variables);
         } elseif ($variables instanceof \Exception) {
             $this->variables = $this->extractException($variables);
+        } elseif ($variables instanceof \Throwable) {
+            $this->variables = $this->extractException($variables);
         } elseif (is_string($variables)) {
             $this->variables = $this->extractString($variables);
         } else {
@@ -59,15 +61,15 @@ class ErrorModel extends ItemModel
     /**
      * Extract error messages from Exception.
      *
-     * @param \Exception $exception
+     * @param \Throwable $exception
      * @return array
      */
-    private function extractException(\Exception $exception): array
+    private function extractException(\Throwable $exception): array
     {
         $messages = [];
         while ($exception) {
             $messages[] = [
-                'message' =>$exception->getMessage()
+                'message' => $exception->getMessage()
             ];
             $exception = $exception->getPrevious();
         }
