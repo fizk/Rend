@@ -69,6 +69,9 @@ class ErrorModel extends ItemModel
         $messages = [];
         while ($exception) {
             $messages[] = [
+                'code' => $exception->getCode(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
                 'message' => $exception->getMessage()
             ];
             $exception = $exception->getPrevious();

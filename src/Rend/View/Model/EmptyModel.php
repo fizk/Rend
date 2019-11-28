@@ -177,7 +177,7 @@ class EmptyModel implements ModelInterface, BaseModelInterface
      */
     public function getVariables()
     {
-        return [];
+        return $this->variables;
     }
 
     /**
