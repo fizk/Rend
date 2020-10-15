@@ -2,8 +2,8 @@
 namespace Rend\Helper\Http;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Headers;
-use Zend\Http\PhpEnvironment\Request;
+use Laminas\Http\Headers;
+use Laminas\Http\PhpEnvironment\Request;
 
 class RangeTest extends TestCase
 {

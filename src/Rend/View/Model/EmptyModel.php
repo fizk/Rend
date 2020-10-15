@@ -1,7 +1,7 @@
 <?php
 namespace Rend\View\Model;
 
-use \Zend\View\Model\ModelInterface as BaseModelInterface;
+use Laminas\View\Model\ModelInterface as BaseModelInterface;
 
 class EmptyModel implements ModelInterface, BaseModelInterface
 {

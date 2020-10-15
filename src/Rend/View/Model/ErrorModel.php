@@ -1,7 +1,7 @@
 <?php
 namespace Rend\View\Model;
 
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 /**
  * Class ErrorModel
@@ -17,7 +17,7 @@ class ErrorModel extends ItemModel
     /**
      * Constructor
      *
-     * @param  \Zend\Form\Form|\Exception|string $variables
+     * @param  \Laminas\Form\Form|\Exception|string $variables
      * @param  array|\Traversable $options
      */
     public function __construct($variables = null, $options = null)

@@ -5,13 +5,13 @@ use Rend\Helper\Http\MultiPart;
 use Rend\View\Model\EmptyModel;
 use Rend\View\Model\ErrorModel;
 use Rend\View\Model\ModelInterface;
-use Zend\Mvc\Controller\AbstractController;
-use Zend\Mvc\MvcEvent;
-use Zend\Http\Request as HttpRequest;
-use Zend\Json\Json;
-use Zend\Mvc\Exception;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;
+use Laminas\Mvc\Controller\AbstractController;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Http\Request as HttpRequest;
+use Laminas\Json\Json;
+use Laminas\Mvc\Exception;
+use Laminas\Stdlib\RequestInterface as Request;
+use Laminas\Stdlib\ResponseInterface as Response;
 
 abstract class AbstractRestfulController extends AbstractController
 {
@@ -40,7 +40,7 @@ abstract class AbstractRestfulController extends AbstractController
     protected $identifierName = 'id';
 
     /**
-     * @var int From Zend\Json\Json
+     * @var int From Laminas\Json\Json
      */
     protected $jsonDecodeType = Json::TYPE_ARRAY;
 
@@ -437,7 +437,7 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function requestHasContentType(Request $request, $contentType = '')
     {
-        /** @var $headerContentType \Zend\Http\Header\ContentType */
+        /** @var $headerContentType \Laminas\Http\Header\ContentType */
         $headerContentType = $request->getHeaders()->get('content-type');
         if (!$headerContentType) {
             return false;
@@ -505,7 +505,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Attempts to see if an identifier was passed in either the URI or the
      * query string, returning it if found. Otherwise, returns a boolean false.
      *
-     * @param  \Zend\Router\RouteMatch $routeMatch
+     * @param  \Laminas\Router\RouteMatch $routeMatch
      * @param  Request $request
      * @return false|mixed
      */
@@ -566,12 +566,12 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * HTTP-Override takes precedence over Method.
      *
-     * @param \Zend\Stdlib\RequestInterface $request
+     * @param \Laminas\Stdlib\RequestInterface $request
      * @return string
      */
     private function resolveMethod($request)
     {
-        /** @var  $overwrite \Zend\Http\Header\GenericHeader */
+        /** @var  $overwrite \Laminas\Http\Header\GenericHeader */
         if ($overwrite = $request->getHeader('X-Http-Method-Override', null)) {
             return strtolower($overwrite->getFieldValue());
         }

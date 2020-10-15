@@ -2,11 +2,11 @@
 namespace Rend\View\Strategy;
 
 use Rend\View\Model\ModelInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\View\Renderer\RendererInterface;
-use Zend\View\ViewEvent;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\View\Renderer\RendererInterface;
+use Laminas\View\ViewEvent;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
 
 /**
  * Class MessageStrategy
@@ -68,10 +68,10 @@ class MessageStrategy implements ListenerAggregateInterface
 
         $result   = $e->getResult();
 
-        /** @var $model \Zend\View\Model\ModelInterface */
+        /** @var $model \Laminas\View\Model\ModelInterface */
         $model = $e->getModel();
 
-        /** @var $response \Zend\Http\PhpEnvironment\Response */
+        /** @var $response \Laminas\Http\PhpEnvironment\Response */
         $response = $e->getResponse();
         $response->setContent($result);
 

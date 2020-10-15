@@ -1,7 +1,7 @@
 <?php
 namespace Rend\Helper\Http;
 
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 
 trait Range
 {
@@ -16,7 +16,7 @@ trait Range
      */
     private function getRange(RequestInterface $request, $count = 0, $perPage = 25): RangeValue
     {
-        /** @var $range \Zend\Http\Header\Range */
+        /** @var $range \Laminas\Http\Header\Range */
         if ($range = $request->getHeader('Range')) {
             $match = [];
             preg_match('/([0-9]*)-([0-9]*)?/', $range->getFieldValue(), $match);

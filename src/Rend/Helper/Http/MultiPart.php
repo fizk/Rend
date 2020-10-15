@@ -1,7 +1,7 @@
 <?php
 namespace Rend\Helper\Http;
 
-use Zend\Http\PhpEnvironment\Request;
+use Laminas\Http\PhpEnvironment\Request;
 
 class MultiPart
 {
@@ -11,7 +11,7 @@ class MultiPart
             return $request->getPost()->toArray();
         }
 
-        /** @var  $contentType \Zend\Http\Header\ContentType */
+        /** @var  $contentType \Laminas\Http\Header\ContentType */
         if (($contentType = $request->getHeaders('content-type'))) {
             if ($contentType->getMediaType() === 'multipart/form-data') {
                 $params = $contentType->getParameters();
